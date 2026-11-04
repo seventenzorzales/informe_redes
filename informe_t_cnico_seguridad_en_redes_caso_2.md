@@ -49,7 +49,35 @@ Si bien las medidas anteriores delimitan el perímetro y segmentan la red en cua
 
 En base a la arquitectura de red del caso (Figura 1), se identifican **cinco canales críticos** expuestos a brechas de confidencialidad, integridad y autenticación:
 
-![Mapa de flujos críticos para el análisis criptográfico](CI3062_U2_C2_figura1(1).png)
+![Mapa de flujos críticos para el análisis criptográfico](CI3062_U2_C2_figura1.png)
+
+```mermaid
+graph TD
+    subgraph Internet_Redes_Publicas ["Internet y Redes Públicas / Móviles"]
+        M["Conductores y Flota<br/>Red Móvil"]
+        B2B["Clientes y Proveedores<br/>Plataformas B2B / Correo"]
+        SUP["Supervisores y Gerencia<br/>Acceso Remoto VPN"]
+    end
+
+    NGFW["Router / Firewall Perimetral NGFW"]
+    SW["Switch de Acceso L3<br/>Segmentación VLAN 10, 20, 30, 99"]
+
+    subgraph Red_Interna_Corporativa ["Red Interna Segmentada"]
+        V10["VLAN 10: Usuarios y Operadores<br/>Terminales de Bodega"]
+        V20["VLAN 20: Sistema de Inventario<br/>WMS / Base de Datos"]
+        V30["VLAN 30: SIEM<br/>Monitoreo y Logs"]
+        V99["VLAN 99: Administración TI<br/>Directorio, Correo y Backups"]
+    end
+
+    M -->|"Canal 2: Estado de entregas"| NGFW
+    B2B <-->|"Canal 3: Manifiestos y Trazabilidad"| NGFW
+    SUP -->|"Canal 4: Consulta Inventario / KPIs"| NGFW
+    NGFW --- SW
+    V10 <-->|"Canal 1: Órdenes y Guías"| SW
+    SW <-->|"Canal 1"| V20
+    SW -->|"Canal 2 y 4"| V20
+    SW -->|"Canal 5: Eventos de Seguridad"| V30
+    V99 <-->|"Canal 5 / Servicios"| SW
 
 1. **Canal 1 – Órdenes de despacho y guías de traslado (`VLAN 20` Sistema de Inventario $\leftrightarrow$ `VLAN 10` Terminales de Bodega):**
    * **Problema detectado:** Transmisión interna en texto plano dentro de la red corporativa.
