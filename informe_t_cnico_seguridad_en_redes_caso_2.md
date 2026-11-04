@@ -78,6 +78,7 @@ graph TD
     SW -->|"Canal 2 y 4"| V20
     SW -->|"Canal 5: Eventos de Seguridad"| V30
     V99 <-->|"Canal 5 / Servicios"| SW
+```
 
 1. **Canal 1 – Órdenes de despacho y guías de traslado (`VLAN 20` Sistema de Inventario $\leftrightarrow$ `VLAN 10` Terminales de Bodega):**
    * **Problema detectado:** Transmisión interna en texto plano dentro de la red corporativa.
