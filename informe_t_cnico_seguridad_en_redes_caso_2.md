@@ -47,7 +47,7 @@ Si bien las medidas anteriores delimitan el perímetro y segmentan la red en cua
 
 ## 2. Síntesis de Canales Críticos y Riesgos Criptográficos Identificados
 
-En base a la arquitectura de red del caso (Figura 1), se identifican **cinco canales críticos** expuestos a brechas de confidencialidad, integridad y autenticación:
+A partir del modelo arquitectónico del caso (Figura 1), se identifican **cinco canales críticos de comunicación** expuestos a riesgos de interceptación (*sniffing*), intermediación (*Man-in-the-Middle*), falsificación documental y compromiso de credenciales:
 
 ![Mapa de flujos críticos para el análisis criptográfico](CI3062_U2_C2_figura1.png)
 
